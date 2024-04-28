@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2d52bb3e8d7af6644bfe9bb06bcace41
+guid: 2b526664e339bf5469bbadbed54b003b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,70 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wake_0
+      name: move without FX_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 184
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 486c01d9b496b934ebbc44810945587c
+      internalID: 729597561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: move without FX_1
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 157
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1487008da86e79e409f4f3ca660aa7b2
+      internalID: -234243351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: move without FX_2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 131
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7ee5a989495a1d4094135631704714e
+      internalID: 917420903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: move without FX_3
       rect:
         serializedVersion: 2
         x: 15
@@ -111,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c741377a2928c640bdbe5fce87c70cb
-      internalID: -1450266384
+      spriteID: 833180cf59e5d614b8a8f00cc68620d0
+      internalID: 170629654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wake_1
+      name: move without FX_4
       rect:
         serializedVersion: 2
         x: 15
@@ -132,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ceb5847c8470ec0419bbb5eb1a21289e
-      internalID: 828310288
+      spriteID: 412e5951461467a489be3c9729056aac
+      internalID: 380446090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wake_2
+      name: move without FX_5
       rect:
         serializedVersion: 2
         x: 15
@@ -153,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3643ecd59532e2429077e6aabd8b298
-      internalID: -1548895791
+      spriteID: 884573dad65b9a1489f7b0b70d612342
+      internalID: 1529947221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wake_3
+      name: move without FX_6
       rect:
         serializedVersion: 2
         x: 15
@@ -174,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cc33eb5d2aa0514ea35810d5284b2c3
-      internalID: 670630351
+      spriteID: 9cae934d3aba2bc4fa44702b141ad4e7
+      internalID: 1304689468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wake_4
+      name: move without FX_7
       rect:
         serializedVersion: 2
         x: 15
@@ -195,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 382198cd57da6934f91e2690e01db0fd
-      internalID: 143370175
+      spriteID: 01225c2873a96e84b9901b63eb092b5e
+      internalID: 383927198
       vertices: []
       indices: 
       edges: []
@@ -212,11 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      wake_0: -1450266384
-      wake_1: 828310288
-      wake_2: -1548895791
-      wake_3: 670630351
-      wake_4: 143370175
+      move without FX_0: 729597561
+      move without FX_1: -234243351
+      move without FX_2: 917420903
+      move without FX_3: 170629654
+      move without FX_4: 380446090
+      move without FX_5: 1529947221
+      move without FX_6: 1304689468
+      move without FX_7: 383927198
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
