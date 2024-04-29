@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public float JumpForce;
     public float Speed;
-
     private Rigidbody2D Rigidbody2D;
     private Animator Animator;
     private float Horizontal;
@@ -43,6 +42,5 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() {
         Rigidbody2D.velocity = new Vector2(Horizontal*Speed,Rigidbody2D.velocity.y);
-
     }
 }
