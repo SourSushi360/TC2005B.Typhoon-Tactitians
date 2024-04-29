@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -42,5 +43,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() {
         Rigidbody2D.velocity = new Vector2(Horizontal*Speed,Rigidbody2D.velocity.y);
+    }
+    public void OnTriggerStay2D(Collider2D other) {
+        if (other.CompareTag("Finish") && Input.GetKeyDown(KeyCode.S)) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+        }
     }
 }
