@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -46,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D other) {
         if (other.CompareTag("Finish") && Input.GetKeyDown(KeyCode.S)) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+            GameManager.Instance.PreviousScene();
         }
     }
 }
