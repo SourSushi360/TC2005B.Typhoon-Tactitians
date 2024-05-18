@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Typhoon Tactitians.sln"
+    "dotnet.defaultSolution": "TC2005B.Typhoon-Tactitians.sln"
 }
