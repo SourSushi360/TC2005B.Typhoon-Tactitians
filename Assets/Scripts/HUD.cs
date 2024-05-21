@@ -7,8 +7,7 @@ public class HUD : MonoBehaviour
 {
     public GameManager gameManager;
     public TextMeshProUGUI puntos;
-
-    [SerializeField] private TextMeshProUGUI tiempo;
+    public TextMeshProUGUI tiempo;
     private int minutos, segundos;
 
     private int elapsedTime = 0;
