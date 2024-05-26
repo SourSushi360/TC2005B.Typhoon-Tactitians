@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,11 +10,16 @@ public class PlayerMovement : MonoBehaviour
     private Animator Animator;
     private float Horizontal;
     private bool Grounded;
+    private Collider2D hitbox;
+    private float hitboxOffset;
 
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+        // Used to calculate the offset of the hitbox for the ground collision
+        hitbox = GetComponent<Collider2D>();
+        hitboxOffset = hitbox.offset.x / 2;
     }
 
     void Update()
@@ -25,12 +29,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (Horizontal < 0.0f) {
             transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
+            hitboxOffset = (hitbox.offset.x / 2) * -1;
         } else if (Horizontal > 0.0f) {
             transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
+            hitboxOffset = hitbox.offset.x / 2;
         }
 
-
-        if (Physics2D.Raycast(transform.position, Vector3.down, 0.1f)) {
+        Vector3 rayStart = new Vector3(Rigidbody2D.position.x + hitboxOffset, Rigidbody2D.position.y, 0);
+        
+        Debug.DrawRay(rayStart, Vector3.down, Color.white);
+        if (Physics2D.Raycast(rayStart, Vector3.down, 0.1f)) {
             Grounded = true;
         } else Grounded = false;
         if (Input.GetKeyDown(KeyCode.W) && Grounded) {
@@ -38,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     private void Jump() {
+        Rigidbody2D.velocity = new Vector2(0,0);
         Rigidbody2D.AddForce(Vector2.up*JumpForce);
     }
 
@@ -46,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D other) {
         if (other.CompareTag("Finish") && Input.GetKeyDown(KeyCode.S)) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+            GameManager.Instance.PreviousScene();
         }
     }
 }
