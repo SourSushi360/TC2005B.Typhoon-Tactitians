@@ -8,12 +8,15 @@ public class HUD : MonoBehaviour
     public GameManager gameManager;
     public TextMeshProUGUI puntos;
     public TextMeshProUGUI tiempo;
+    public TextMeshProUGUI instructions;
     private int minutos, segundos;
 
     private int elapsedTime = 0;
     
     void Start(){
         StartCoroutine(Timer());
+        StartCoroutine(InstFade());
+        puntos.text = GameData.resources.ToString();
     }
 
     void Update()
@@ -21,7 +24,7 @@ public class HUD : MonoBehaviour
         minutos = Mathf.FloorToInt(elapsedTime / 60);
         segundos = Mathf.FloorToInt(elapsedTime % 60);
         tiempo.text = string.Format("{0:00}:{1:00}", minutos, segundos);
-        puntos.text = gameManager.FoodCount.ToString();
+        puntos.text = GameData.resources.ToString();
     }
 
     public IEnumerator Timer()
@@ -29,6 +32,16 @@ public class HUD : MonoBehaviour
         while(true){
             elapsedTime += 1;
             yield return new WaitForSeconds(1);
+        }
+        
+    }
+
+    public IEnumerator InstFade()
+    {
+        yield return new WaitForSeconds(3);
+        while(instructions.alpha > 0){
+            instructions.alpha -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
         }
         
     }
