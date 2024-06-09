@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         Animator = GetComponent<Animator>();
         // Used to calculate the offset of the hitbox for the ground collision
         hitbox = GetComponent<Collider2D>();
-        hitboxOffset = hitbox.offset.x / 2;
+        hitboxOffset = hitbox.offset.x;
     }
 
     void Update()
@@ -29,10 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (Horizontal < 0.0f) {
             transform.localScale = new Vector3(-0.5f, 0.5f, 1.0f);
-            hitboxOffset = (hitbox.offset.x / 2) * -1;
+            hitboxOffset = hitbox.offset.x  * -1;
         } else if (Horizontal > 0.0f) {
             transform.localScale = new Vector3(0.5f, 0.5f, 1.0f);
-            hitboxOffset = hitbox.offset.x / 2;
+            hitboxOffset = hitbox.offset.x;
         }
 
         Vector3 rayStart = new Vector3(Rigidbody2D.position.x + hitboxOffset, Rigidbody2D.position.y, 0);

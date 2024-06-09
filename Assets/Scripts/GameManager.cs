@@ -25,10 +25,13 @@ public class GameManager : MonoBehaviour
             // If not, we pick the space
             Instance = this;
         }
+
+        foodCount = GameData.resources;
     }
 
     public void SumarPuntos(int puntos) {
         foodCount += puntos;
+        GameData.resources += puntos;
         Debug.Log(foodCount);
     }
 
