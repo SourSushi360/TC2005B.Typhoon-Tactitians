@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class UpgradeStat : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class UpgradeStat : MonoBehaviour
     private int level;
 
     private int price;
+
+    [SerializeField]
+    private UnityEvent _levelUp;
 
     void Start()
     {
@@ -28,14 +32,15 @@ public class UpgradeStat : MonoBehaviour
     }
 
     public void IncreaseLevel(){
-        if(GameData.resources >= price){
+        if(GameData.globalResources >= price){
             level += 1;
             GameData.upgradeLevels[upgdName] = level;
             
-            GameData.resources -= price; 
+            GameData.globalResources -= price; 
             price = level * 10;
             
             updateText();
+            _levelUp.Invoke();
         }
     }
 

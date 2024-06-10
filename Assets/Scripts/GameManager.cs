@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private UnityEvent _collectedResources;
 
     // Singleton functionality, there should only be one instance of this object
     public static GameManager Instance {
@@ -26,12 +29,13 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        foodCount = GameData.resources;
+        foodCount = GameData.runResources;
     }
 
     public void SumarPuntos(int puntos) {
         foodCount += puntos;
-        GameData.resources += puntos;
+        GameData.runResources += puntos;
+        _collectedResources.Invoke();
         Debug.Log(foodCount);
     }
 
