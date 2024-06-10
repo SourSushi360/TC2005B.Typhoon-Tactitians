@@ -37,4 +37,12 @@ public class SceneController : MonoBehaviour
         PlayerPrefs.SetInt("suitUpgrade", GameData.upgradeLevels["suitUpgrade"]);
         PlayerPrefs.SetInt("sensorUpgrade", GameData.upgradeLevels["sensorUpgrade"]);
     }
+
+    public void QuitGame(){
+        PlayerPrefs.SetInt("globalResources", GameData.globalResources);
+        PlayerPrefs.SetInt("suitUpgrade", GameData.upgradeLevels["suitUpgrade"]);
+        PlayerPrefs.SetInt("sensorUpgrade", GameData.upgradeLevels["sensorUpgrade"]);
+        Application.Quit();
+        
+    }
 }
