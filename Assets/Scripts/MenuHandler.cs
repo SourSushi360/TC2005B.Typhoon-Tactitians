@@ -5,13 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class MenuHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
+    void Start(){
+        
+        if(GameData.upgradeLevels.TryGetValue("suitUpgrade", out int value)){
+
+        }else{
+            GameData.upgradeLevels.Add("suitUpgrade", 0);
+            GameData.upgradeLevels.Add("sensorUpgrade", 0);
+        }
+        
+    }
+    
     public void PlayGame(){
+        GameData.globalResources = PlayerPrefs.GetInt("globalResources", 0);
+        GameData.upgradeLevels["suitUpgrade"] = PlayerPrefs.GetInt("suitUpgrade", 0);
+        GameData.upgradeLevels["sensorUpgrade"] = PlayerPrefs.GetInt("sensorUpgrade", 0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void NewGame(){
+        GameData.globalResources = 0;
+        GameData.upgradeLevels["suitUpgrade"] = 0;
+        GameData.upgradeLevels["sensorUpgrade"] = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void QuitGame(){
-        Debug.Log("Quit");
+        PlayerPrefs.SetInt("globalResources", GameData.globalResources);
+        PlayerPrefs.SetInt("suitUpgrade", GameData.upgradeLevels["suitUpgrade"]);
+        PlayerPrefs.SetInt("sensorUpgrade", GameData.upgradeLevels["sensorUpgrade"]);
         Application.Quit();
+        
     }
 }

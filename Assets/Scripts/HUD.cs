@@ -15,8 +15,8 @@ public class HUD : MonoBehaviour
     
     void Start(){
         StartCoroutine(Timer());
-        StartCoroutine(InstFade());
-        puntos.text = GameData.resources.ToString();
+        StartCoroutine(InstructionsFade());
+        puntos.text = "Recursos recogidos: " + GameData.runResources.ToString();
     }
 
     void Update()
@@ -24,7 +24,6 @@ public class HUD : MonoBehaviour
         minutos = Mathf.FloorToInt(elapsedTime / 60);
         segundos = Mathf.FloorToInt(elapsedTime % 60);
         tiempo.text = string.Format("{0:00}:{1:00}", minutos, segundos);
-        puntos.text = GameData.resources.ToString();
     }
 
     public IEnumerator Timer()
@@ -36,7 +35,7 @@ public class HUD : MonoBehaviour
         
     }
 
-    public IEnumerator InstFade()
+    public IEnumerator InstructionsFade()
     {
         yield return new WaitForSeconds(3);
         while(instructions.alpha > 0){
@@ -44,6 +43,10 @@ public class HUD : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         
+    }
+
+    public void updateRunResources(){
+        puntos.text = "Recursos recogidos: " + GameData.runResources.ToString();
     }
 
 }
