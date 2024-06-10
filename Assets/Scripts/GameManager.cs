@@ -42,4 +42,11 @@ public class GameManager : MonoBehaviour
     public void PreviousScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
     }
+
+    public void PlayerDied(){
+        foodCount = 0;
+        GameData.runResources = 0;
+        _collectedResources.Invoke();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+    }
 }
