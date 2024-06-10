@@ -9,17 +9,13 @@ public class SceneController : MonoBehaviour
 {
     public TextMeshProUGUI resources;
 
-    void Awake(){
-        if(GameData.upgradeLevels.TryGetValue("suitUpgrade", out int value)){
-
-        }else{
-            GameData.upgradeLevels.Add("suitUpgrade", 0);
-            GameData.upgradeLevels.Add("sensorUpgrade", 0);
+    void Start(){
+        if(GameData.runResources > 0){
+            GameData.globalResources += GameData.runResources;
+            GameData.runResources = 0;
         }
-    }
-    void FixedUpdate(){
-        resources.text = "Resources: " + GameData.resources.ToString();
-        
+        updateResources();
+        SaveData();
     }
     
     public void NextScene(){
@@ -28,6 +24,25 @@ public class SceneController : MonoBehaviour
 
     public void PreviousScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+        SaveData();
     }
     
+    public void updateResources(){
+        resources.text = "Resources: " + GameData.globalResources.ToString();
+        SaveData();
+    }
+
+    void SaveData(){
+        PlayerPrefs.SetInt("globalResources", GameData.globalResources);
+        PlayerPrefs.SetInt("suitUpgrade", GameData.upgradeLevels["suitUpgrade"]);
+        PlayerPrefs.SetInt("sensorUpgrade", GameData.upgradeLevels["sensorUpgrade"]);
+    }
+
+    public void QuitGame(){
+        PlayerPrefs.SetInt("globalResources", GameData.globalResources);
+        PlayerPrefs.SetInt("suitUpgrade", GameData.upgradeLevels["suitUpgrade"]);
+        PlayerPrefs.SetInt("sensorUpgrade", GameData.upgradeLevels["sensorUpgrade"]);
+        Application.Quit();
+        
+    }
 }
