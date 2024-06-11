@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private Collider2D hitbox;
     private float hitboxOffset;
 
+    private int health = 1;
+
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -21,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         // Used to calculate the offset of the hitbox for the ground collision
         hitbox = GetComponent<Collider2D>();
         hitboxOffset = hitbox.offset.x;
+        health += GameData.upgradeLevels["suitUpgrade"];
     }
 
     void Update()
@@ -70,6 +73,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Finish")) {
             touchingStair = false;
+        }
+    }
+    
+    public void getHit(int dmg){
+        health -= dmg;
+        if(health <= 0){
+            GameManager.Instance.PlayerDied();
         }
     }
 }
