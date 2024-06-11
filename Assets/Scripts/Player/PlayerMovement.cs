@@ -16,6 +16,24 @@ public class PlayerMovement : MonoBehaviour
 
     private int health = 1;
 
+    // Singleton functionality, there should only be one instance of this object
+    public static PlayerMovement Instance {
+        get;
+        private set;
+    }
+
+    void Awake()
+    {
+        // Corrective singleton
+        // We check if the instance exists
+        if(Instance != null){
+            Destroy(gameObject);
+        } else {
+            // If not, we pick the space
+            Instance = this;
+        }
+    }
+
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -62,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
             if (touchingStair)
             {
                 GameManager.Instance.PreviousScene();
+                Speed = 0;
             }
         }
     }
@@ -96,12 +115,16 @@ public class PlayerMovement : MonoBehaviour
     public void getHit(int dmg)
     {
         health -= dmg;
-        if (health <= 0)
-        {
+        HUD.Instance.updateHealth();
+        if(health <= 0){
             GameManager.Instance.PlayerDied();
+            Speed = 0;
         }
     }
 
+    public int GetHealth(){
+        return health;
+    }
     public void PushBack(Vector2 direction, float force)
     {
         Rigidbody2D.AddForce(direction * force, ForceMode2D.Impulse);
