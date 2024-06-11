@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private UnityEvent _collectedResources;
 
+    [SerializeField]
+    private UnityEvent _successfulExtraction;
+
+    [SerializeField]
+    private UnityEvent _failedExtraction;
+
     // Singleton functionality, there should only be one instance of this object
     public static GameManager Instance {
         get;
@@ -40,13 +46,21 @@ public class GameManager : MonoBehaviour
     }
 
     public void PreviousScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
+        _successfulExtraction.Invoke();
+        StartCoroutine(waitForReader());
     }
 
     public void PlayerDied(){
+        _failedExtraction.Invoke();
+        StartCoroutine(waitForReader());
         foodCount = 0;
         GameData.runResources = 0;
         _collectedResources.Invoke();
+    }
+
+    public IEnumerator waitForReader()
+    {
+        yield return new WaitForSeconds(5);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
     }
 }

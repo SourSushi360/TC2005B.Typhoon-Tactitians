@@ -5,18 +5,36 @@ using TMPro;
 
 public class HUD : MonoBehaviour
 {
+    // Singleton functionality, there should only be one instance of this object
+    public static HUD Instance {
+        get;
+        private set;
+    }
     public GameManager gameManager;
     public TextMeshProUGUI puntos;
+    public TextMeshProUGUI vida;
     public TextMeshProUGUI tiempo;
     public TextMeshProUGUI instructions;
     private int minutos, segundos;
 
     private int elapsedTime = 0;
-    
+    void Awake()
+    {
+        // Corrective singleton
+        // We check if the instance exists
+        if(Instance != null){
+            Destroy(gameObject);
+        } else {
+            // If not, we pick the space
+            Instance = this;
+        }
+    }
+
     void Start(){
         StartCoroutine(Timer());
         StartCoroutine(InstructionsFade());
-        puntos.text = "Recursos recogidos: " + GameData.runResources.ToString();
+        puntos.text = "Resources collected: " + GameData.runResources.ToString();
+        vida.text = "Remaining hitpoints: " + PlayerMovement.Instance.GetHealth();
     }
 
     void Update()
@@ -46,7 +64,12 @@ public class HUD : MonoBehaviour
     }
 
     public void updateRunResources(){
-        puntos.text = "Recursos recogidos: " + GameData.runResources.ToString();
+        puntos.text = "Resources collected: " + GameData.runResources.ToString();
+        
+    }
+
+    public void updateHealth(){
+        vida.text = "Remaining hitpoints: " + PlayerMovement.Instance.GetHealth();
     }
 
 }
