@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator Animator;
     private float Horizontal;
     private bool Grounded;
+    private bool touchingStair = false;
     private Collider2D hitbox;
     private float hitboxOffset;
 
@@ -37,13 +38,20 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 rayStart = new Vector3(Rigidbody2D.position.x + hitboxOffset, Rigidbody2D.position.y, 0);
         
-        Debug.DrawRay(rayStart, Vector3.down, Color.white);
+        //Debug.DrawRay(rayStart, Vector3.down, Color.white);
         if (Physics2D.Raycast(rayStart, Vector3.down, 0.1f)) {
             Grounded = true;
         } else Grounded = false;
         if (Input.GetKeyDown(KeyCode.W) && Grounded) {
             Jump();
         }
+
+        if (Input.GetKeyDown(KeyCode.S)) {
+            if(touchingStair){
+                GameManager.Instance.PreviousScene();
+            }
+        }
+
     }
     private void Jump() {
         Rigidbody2D.velocity = new Vector2(0,0);
@@ -53,9 +61,15 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate() {
         Rigidbody2D.velocity = new Vector2(Horizontal*Speed,Rigidbody2D.velocity.y);
     }
-    public void OnTriggerStay2D(Collider2D other) {
-        if (other.CompareTag("Finish") && Input.GetKeyDown(KeyCode.S)) {
-            GameManager.Instance.PreviousScene();
+    public void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Finish")) {
+            touchingStair = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.CompareTag("Finish")) {
+            touchingStair = false;
         }
     }
 }
